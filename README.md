@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Esse é um projeto Fullstack NextJs de um Simulador de Chatbot.
 
-## Getting Started
+## Instalação
 
-First, run the development server:
+Primeiro, após fazer o clone do projeto e entrar na pasta pelo terminal, rode o comando:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+# depois
+pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) com seu browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estrutura do Projeto
 
-## Learn More
+Adotei uma arquitetura organizada por responsabilidades, separando as camadas de backend e frontend para facilitar a manutenção e escalabilidade do sistema.
 
-To learn more about Next.js, take a look at the following resources:
+### Backend (backend)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Dentro da pasta (backend), a estrutura foi dividida conforme a função de cada camada:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📁 api
 
-## Deploy on Vercel
+- Contém os endpoints da aplicação.
+- Cada endpoint está separado em seu respectivo arquivo, facilitando a manutenção e localização.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📁 db
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Responsável por toda a integração com o banco de dados:
+- schemas: definição das entidades do banco.
+- database.ts: é o arquivo responsável por criar a conexão com o banco de dados.
+
+📁 model
+
+- Contém os modelos de acesso ao banco, centralizando as operações de CRUD.
+- Os modelos fazem a comunicação direta com as entidades definidas nos schemas.
+
+### Frontend
+
+No frontend, foi criada a pasta /services para centralizar o consumo dos endpoints da API, mantendo a organização e facilitando o reuso do código.
+
+Os estados do React foram utilizados para:
+- armazenar os dados retornados da API;
+- gerenciar alterações nos usuários e outras entidades;
+- manter o fluxo de dados previsível na aplicação.
